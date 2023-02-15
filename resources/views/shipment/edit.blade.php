@@ -13,7 +13,7 @@
             </div>
             <table class="table ">
                 <tbody>
-                    @hasanyrole('Admin|User|Manager')
+                    @hasanyrole('Admin|User')
                         <tr>
                             <td>
                                 <h4> <b> 1. General Information </b></h4>
@@ -43,19 +43,24 @@
                                     name="quantity_contract" required></td>
                         </tr>
                         <tr>
+                            <td>d. Contract Amount (*)</td>
+                            <td><input value="{{ $shipment->quantity_contract }}" class="form-control" type="number"
+                                    name="contract_amount" required></td>
+                        </tr>
+                        <tr>
                             <td>e. Quantity Amount (*)</td>
-                            <td><select class="form-control" name="contract_amount" id="">
-                                    <option value="USD" {{ $shipment->contract_amount == 'USD' ? 'selected' : '' }}>USD
+                            <td><select class="form-control" name="contract_amount_curr" id="">
+                                    <option value="USD" {{ $shipment->contract_amount_curr == 'USD' ? 'selected' : '' }}>USD
                                     </option>
-                                    <option value="JPY" {{ $shipment->contract_amount == 'JPY' ? 'selected' : '' }}>JPY
+                                    <option value="JPY" {{ $shipment->contract_amount_curr == 'JPY' ? 'selected' : '' }}>JPY
                                     </option>
-                                    <option value="EUR" {{ $shipment->contract_amount == 'EUR' ? 'selected' : '' }}>EUR
+                                    <option value="EUR" {{ $shipment->contract_amount_curr == 'EUR' ? 'selected' : '' }}>EUR
                                     </option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>f. Retention Money (*)</td>
+                            <td>f. Retention Money </td>
                             <td><input value="{{ $shipment->retention_money }}" class="form-control" type="text"
                                     name="retention_money">
                             </td>
@@ -96,20 +101,12 @@
                         </tr>
                         <tr>
                             <td>j. Requester Section / PIC (*)</td>
-                            <td><select class="form-control" name="pic" id="">
-                                    <option value="section" {{ $shipment->contract_amount == 'section' ? 'selected' : '' }}>
-                                        Section</option>
-                                    <option value="inisial" {{ $shipment->contract_amount == 'inisial' ? 'selected' : '' }}>
-                                        Inisial PIC</option>
-                                </select>
+                            <td><input value="{{ $shipment->pic }}" class="form-control" type="text" name="pic"
+                                    required>
                             </td>
+
                         </tr>
-                        <tr>
-                            <td>k. Function Of Goods (*)</td>
-                            <td><input value="{{ $shipment->function_of_good }}" class="form-control" type="text"
-                                    name="function_of_good" required>
-                            </td>
-                        </tr>
+
                         <tr>
                             <td>
                                 <h4> <b> 2. Information For Custom Clearence (*)</b></h4>
@@ -133,17 +130,23 @@
                                     name="nama_barang" required></td>
                         </tr>
                         <tr>
-                            <td> Nilai Barang (*)</td>
+                            <td> Total Nilai Import (*)</td>
                             <td><input value="{{ $shipment->nilai_barang }}" class="form-control" type="number"
                                     name="nilai_barang" required></td>
                         </tr>
                         <tr>
-                            <td>c. Quantity Delivery (*)</td>
+                            <td>c. Function Of Goods (*)</td>
+                            <td><input value="{{ $shipment->function_of_good }}" class="form-control" type="text"
+                                    name="function_of_good" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>d. Quantity Delivery (*)</td>
                             <td><input value="{{ $shipment->quantity_delivery }}" class="form-control" type="text"
                                     name="quantity_delivery" required></td>
                         </tr>
                         <tr>
-                            <td>d. Invoice Amount Currency (*)</td>
+                            <td>e. Invoice Amount Currency (*)</td>
                             <td><select class="form-control" name="invoice_amount_curr" id="">
                                     <option value="USD" {{ $shipment->contract_amount == 'USD' ? 'selected' : '' }}>USD
                                     </option>
@@ -162,19 +165,22 @@
                                     name="invoice_amount" required></td>
                         </tr>
                         <tr>
-                            <td>e. Quantity Balance (*)</td>
+                            <td>f. Quantity Balance (*)</td>
                             <td><input value="{{ $shipment->quantity_balance }}" class="form-control" type="number"
                                     name="quantity_balance" required></td>
                         </tr>
 
                         <tr>
-                            <td>f. Remaining contract Currency (*)</td>
+                            <td>g. Remaining contract Currency (*)</td>
                             <td><select class="form-control" name="remaining_contract_curr" id="" required>
-                                    <option value="USD" {{ $shipment->remaining_contract_curr == 'USD' ? 'selected' : '' }}>
+                                    <option value="USD"
+                                        {{ $shipment->remaining_contract_curr == 'USD' ? 'selected' : '' }}>
                                         USD</option>
-                                    <option value="JPY" {{ $shipment->remaining_contract_curr == 'JPY' ? 'selected' : '' }}>
+                                    <option value="JPY"
+                                        {{ $shipment->remaining_contract_curr == 'JPY' ? 'selected' : '' }}>
                                         JPY</option>
-                                    <option value="EUR" {{ $shipment->remaining_contract_curr == 'EUR' ? 'selected' : '' }}>
+                                    <option value="EUR"
+                                        {{ $shipment->remaining_contract_curr == 'EUR' ? 'selected' : '' }}>
                                         EUR</option>
                                 </select>
                             </td>
@@ -188,35 +194,35 @@
                         </tr>
                         <tr>
                         <tr>
-                            <td>g. Name Of Vessel (*) </td>
+                            <td>h. Name Of Vessel (*) </td>
                             <td>
                                 <input value="{{ $shipment->name_of_vessel }}" class="form-control" type="text"
                                     name="name_of_vessel" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>h. Shipper / Exportir (*)</td>
+                            <td>i. Shipper / Exportir (*)</td>
                             <td>
                                 <input value="{{ $shipment->shipper }}" class="form-control" type="text" name="shipper"
                                     required>
                             </td>
                         </tr>
                         <tr>
-                            <td>i. Consignee / Notify party (*)</td>
+                            <td>j. Consignee / Notify party (*)</td>
                             <td>
                                 <input value="{{ $shipment->consignee }}" class="form-control" type="text"
                                     name="consignee" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>j. Issuing Insurance Company (*) </td>
+                            <td>k. Issuing Insurance Company (*) </td>
                             <td>
                                 <input value="{{ $shipment->issuing_insurance_company }}" class="form-control"
                                     type="text" name="issuing_insurance_company" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>k. Amount of Insurance Currency (*)</td>
+                            <td>l. Amount of Insurance Currency (*)</td>
                             <td><select class="form-control" name="amount_of_insurance_curr" id="" required>
                                     <option value="USD"
                                         {{ $shipment->amount_of_insurance_curr == 'USD' ? 'selected' : '' }}>USD</option>
@@ -235,33 +241,33 @@
                                     name="amount_of_insurance" required></td>
                         </tr>
                         <tr>
-                            <td>l. Loading Port (*)</td>
+                            <td>m. Loading Port (*)</td>
                             <td>
                                 <input value="{{ $shipment->loading_port }}" class="form-control" type="text"
                                     name="loading_port" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>m. ETD Loading Port (*)</td>
+                            <td>n. ETD Loading Port (*)</td>
                             <td><input value="{{ $shipment->etd_loading_port }}" class="form-control" type="date"
                                     name="etd_loading_port" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>n. Unloading Port (*)</td>
+                            <td>o. Unloading Port (*)</td>
                             <td>
                                 <input value="{{ $shipment->unloading_port }}" class="form-control" type="text"
                                     name="unloading_port" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>o. ETA Unloading Port (*)</td>
+                            <td>p. ETA Unloading Port (*)</td>
                             <td><input value="{{ $shipment->eta_unloading_port }}" class="form-control" type="date"
                                     name="eta_unloading_port" required>
                             </td>
                         </tr>
                         <tr>
-                            <td>p. Exp Delivery Time (*)</td>
+                            <td>q. Exp Delivery Time (*)</td>
                             <td><input value="{{ $shipment->exp_delivery_time }}" class="form-control" type="date"
                                     name="exp_delivery_time" required>
                             </td>
@@ -332,8 +338,9 @@
                         </tr>
                         <tr>
                             <td>c. Packing List </td>
-                            <td>
-                            </td>
+                            <td><input value="{{ $shipment->packing_list }}" class="form-control" type="number"
+                                    min="1" name="packing_list" required>
+                            </td>s
                         </tr>
                         <tr>
                             <td> Date </td>
@@ -394,15 +401,53 @@
                         <tr>
                             <td>e. Cert Of Origin Prefensial</td>
                             <td><select class="form-control" name="cert_of_origin_preferensial" id="">
-                                    <option value="Form D" {{ $shipment->cert_of_origin == 'Form D' ? 'selected' : '' }}>Form
-                                        D</option>
-                                    <option value="E" {{ $shipment->cert_of_origin == 'E' ? 'selected' : '' }}>E</option>
-                                    <option value="IJEPA" {{ $shipment->cert_of_origin == 'IJEPA' ? 'selected' : '' }}>IJEPA
+
+                                    <option value="ICCEPA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'ICCEPA' ? 'selected' : '' }}>ICCEPA
                                     </option>
-                                    <option value="AI" {{ $shipment->cert_of_origin == 'AI' ? 'selected' : '' }}>AI
+                                    <option value="AANZFTA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'AANZFTA' ? 'selected' : '' }}>AANZFTA
                                     </option>
-                                    <option value="AK" {{ $shipment->cert_of_origin == 'AK' ? 'selected' : '' }}>AK
+                                    <option value="IJEPA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'IJEPA' ? 'selected' : '' }}>IJEPA</option>
+                                    <option value="IECEPA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'IECEPA' ? 'selected' : '' }}>IECEPA
                                     </option>
+                                    <option value="AHKFTA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'AHKFTA' ? 'selected' : '' }}>AHKFTA
+                                    </option>
+                                    <option value="AIFTA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'AIFTA' ? 'selected' : '' }}>AIFTA</option>
+                                    <option value="AJCEP"
+                                        {{ $shipment->cert_of_origin_prefensial == 'AJCEP' ? 'selected' : '' }}>AJCEP</option>
+                                    <option value="AKFTA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'AKFTA' ? 'selected' : '' }}>AKFTA</option>
+                                    <option value="ATIGA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'ATIGA' ? 'selected' : '' }}>ATIGA</option>s
+                                    <option value="IACEPA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'IACEPA' ? 'selected' : '' }}>IACEPA
+                                    </option>
+                                    <option value="RCEP-ASEAN"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-ASEAN' ? 'selected' : '' }}>RCEP-ASEAN
+                                    </option>
+                                    <option value="RCEP-CHINA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-CHINA' ? 'selected' : '' }}>RCEP-China
+                                    </option>
+                                    <option value="RCEP-JAPAN"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-JAPAN' ? 'selected' : '' }}>RCEP-Japan
+                                    </option>
+                                    <option value="RCEP-New Zaeland"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-New Zaeland' ? 'selected' : '' }}>
+                                        RCEP-New Zaeland</option>
+                                    <option value="RCEP-Korea"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-Korea' ? 'selected' : '' }}>RCEP-Korea
+                                    </option>
+                                    <option value="IKCEPA"
+                                        {{ $shipment->cert_of_origin_prefensial == 'IKCEPA' ? 'selected' : '' }}>IKCEPA
+                                    </option>
+                                    <option value="RCEP-Australia"
+                                        {{ $shipment->cert_of_origin_prefensial == 'RCEP-Australia' ? 'selected' : '' }}>
+                                        RCEP-Australia</option>
                                 </select>
                             </td>
                         </tr>
@@ -643,10 +688,10 @@
                             </td>
                         </tr>
                     @endhasanyrole
-                    @hasanyrole('Staff')
-                        <tr>
+                    @hasanyrole('Admin|Staff')
+                        <tr id="status-tr">
                             <td> Status (*)</td>
-                            <td><select class="form-control" name="status" id="">
+                            <td><select class="form-control" name="status" id="status">
                                     <option value="Pembayaran" {{ $shipment->status == 'Pembayaran' ? 'selected' : '' }}>
                                         Pembayaran
                                     </option>
@@ -655,17 +700,22 @@
                                     </option>
                                     <option value="Delivery" {{ $shipment->status == 'Delivery' ? 'selected' : '' }}>Delivery
                                     </option>
+                                    <option value="Rejected" {{ $shipment->status == 'Rejected' ? 'selected' : '' }}>Rejected
+                                    </option>
                                 </select>
                             </td>
                         </tr>
                     @endhasanyrole
                     @role('Manager')
-                        <tr>
+                        <tr id="status-tr">
                             <td>Status (*)</td>
-                            <td><select class="form-control" name="status" id="">
+                            <td><select class="form-control" name="status" id="status">
                                     <option value="Approve" {{ $shipment->status == 'Approve' ? 'selected' : '' }}>Approve
                                     </option>
+                                    <option value="Rejected" {{ $shipment->status == 'Rejected' ? 'selected' : '' }}>Rejected
+                                    </option>
                                 </select>
+                            </td>
                         </tr>
                     @endrole
 
@@ -677,4 +727,48 @@
         </form>
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            var totalNilaiImpor = "{{ $shipment->total_nilai_import }}";
+            console.log(totalNilaiImpor)
+            var remaining_amount = 0;
+            var quantity_balance = 0;
+            $('#invoice_amount').on('input', function() {
+                var invoice = $(this).val()
+                remaining_amount = totalNilaiImpor - invoice
+                $('#remaining_amount').val(remaining_amount)
+
+            })
+            $('#quantity_delivery').on('input', function() {
+                var quantity = $(this).val()
+                quantity_balance = totalNilaiImpor - quantity
+
+                $('#quantity_balance').val(quantity_balance)
+
+            })
+
+            //Rejected , keterangan
+            $('#status').on('change', function() {
+                var status = $('#status').val()
+                if (status == 'Rejected') {
+                    $('#status-tr').after(
+                        `
+                        <tr id="reject">
+                            <td> Keterangan direject</small></td>
+                            <td>
+                                <textarea class="form-control" rows="5" type="text" name="keterangan_reject">
+                                </textarea>
+                            </td>
+                        </tr>
+                        `
+                    )
+                } else {
+                    $('#reject').remove()
+                }
+            })
+
+        })
+    </script>
 @endsection

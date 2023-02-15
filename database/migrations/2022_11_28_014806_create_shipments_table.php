@@ -27,7 +27,8 @@ class CreateShipmentsTable extends Migration
             // d
             $table->string('quantity_contract', 250);
             // e
-            $table->string('contract_amount', 250);
+            $table->string('contract_amount_curr', 10);
+            $table->string('contract_amount', 50);
             // f
             $table->string('retention_money', 250)->nullable();
             // g
@@ -90,6 +91,7 @@ class CreateShipmentsTable extends Migration
             $table->string('invoice_date');
             $table->string('invoice_file');
             // c.
+            $table->string('packing_list', 100);
             $table->string('packing_date');
             $table->string('packing_file');
             // d.
@@ -130,6 +132,7 @@ class CreateShipmentsTable extends Migration
             $table->string('ppn', 50);
             $table->string('pph', 50);
             $table->string('status', 50)->default('spv-verification')->nullable();
+            $table->string('keterangan_reject', 255)->nullable();
 
             $table->timestamps();
         });

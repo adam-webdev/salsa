@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('title', 'create Shipment')
 @section('content')
+    @php
+        use RealRashid\SweetAlert\Facades\Alert;
+    @endphp
     @include('sweetalert::alert')
     <div class="card p-4">
         {{-- <h3>{{ $transaksi_id }}</h3> --}}
@@ -11,7 +14,7 @@
                 <p></p>
                 <p class="ml-4">(PDF) File harus berformat PDF!</p>
             </div>
-            <table class="table ">
+            <table class="table">
                 <tbody>
                     <tr>
                         <td>
@@ -27,13 +30,13 @@
                     </tr>
                     <tr>
                         <td>b. Supplier / Vendor (*)</td>
-                        <td><input value="{{ old('supplier') }}" class="form-control" type="text" name="supplier"
-                                required>
+                        <td><input value="{{ $transaksi->nama_supplier }}" class="form-control" type="text"
+                                name="supplier" readonly required>
                         </td>
                     </tr>
                     <tr>
                         <td>c. Contract No (*)</td>
-                        <td><input value="{{ $transaksi->nilai_po }}" class="form-control" type="number" name="contract_no"
+                        <td><input value="{{ $transaksi->no_po }}" class="form-control" type="number" name="contract_no"
                                 required readonly></td>
                     </tr>
                     <tr>
@@ -42,8 +45,13 @@
                                 name="quantity_contract" required></td>
                     </tr>
                     <tr>
-                        <td>e. Quantity Amount (*)</td>
-                        <td><select class="form-control" name="contract_amount" id="">
+                        <td>e. Contract Amount (*)</td>
+                        <td><input value="{{ old('contract_amount') }}" class="form-control" min="1" type="number"
+                                name="contract_amount" required></td>
+                    </tr>
+                    <tr>
+                        <td> Contract Amount Currency(*)</td>
+                        <td><select class="form-control" name="contract_amount_curr" id="">
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
                                 <option value="EUR">EUR</option>
@@ -51,27 +59,22 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>f. Retention Money (*)</td>
+                        <td>f. Retention Money </td>
                         <td><input value="{{ old('retention_money') }}" class="form-control" type="text"
                                 name="retention_money">
                         </td>
                     </tr>
-                    <tr>
+                    <tr id='term-tr'>
                         <td>g. Term of Payment (*)</td>
-                        <td><select class="form-control" name="term_of_payment" id="">
+                        <td><select class="form-control" name="term_of_payment" id="term">
                                 <option value="TT">TT</option>
                                 <option value="LC">LC</option>
                             </select>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>h. Issuing Bank LC (*)</td>
-                        <td><input value="{{ old('issuing_bank_lc') }}" class="form-control" type="text"
-                                name="issuing_bank_lc">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>i. Deliery Term Condition (*)</td>
+                        <td>h. Deliery Term Condition (*)</td>
                         <td><select class="form-control" name="delivery_term_condition" id="">
                                 <option value="EX work">EX work</option>
                                 <option value="FOB">FOB</option>
@@ -83,19 +86,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>j. Requester Section / PIC (*)</td>
-                        <td><select class="form-control" name="pic" id="">
-                                <option value="section">Section</option>
-                                <option value="inisial">Inisial PIC</option>
-                            </select>
+                        <td>i. Requester Section / PIC (*)</td>
+                        <td><input value="{{ old('pic') }}" class="form-control" type="text" name="pic">
                         </td>
+
                     </tr>
-                    <tr>
-                        <td>k. Function Of Goods (*)</td>
-                        <td><input value="{{ old('function_of_good') }}" class="form-control" type="text"
-                                name="function_of_good" required>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td>
                             <h4> <b> 2. Information For Custom Clearence (*)</b></h4>
@@ -110,7 +106,7 @@
                     </tr>
                     <tr>
                         <td> Shipment Sequence (*)</td>
-                        <td><input value="{{ old('shipment_sequence') }}" class="form-control" type="text"
+                        <td><input value="{{ $transaksi->total_shipment }}" class="form-control" readonly type="text"
                                 name="shipment_sequence" required></td>
                     </tr>
                     <tr>
@@ -119,17 +115,23 @@
                                 required></td>
                     </tr>
                     <tr>
-                        <td> Nilai Barang (*)</td>
+                        <td> Total Nilai Import (*)</td>
                         <td><input value="{{ $transaksi->total_nilai_import }}" class="form-control" type="number"
                                 name="nilai_barang" required readonly></td>
                     </tr>
                     <tr>
-                        <td>c. Quantity Delivery (*)</td>
-                        <td><input id="quantity_delivery" class="form-control" type="text" name="quantity_delivery"
-                                required></td>
+                        <td>c. Function Of Goods (*)</td>
+                        <td><input value="{{ old('function_of_good') }}" class="form-control" type="text"
+                                name="function_of_good" required>
+                        </td>
                     </tr>
                     <tr>
-                        <td>d. Invoice Amount Currency (*)</td>
+                        <td>d. Quantity Delivery (*)</td>
+                        <td><input id="quantity_delivery" class="form-control" type="number" min="1"
+                                name="quantity_delivery" required></td>
+                    </tr>
+                    <tr>
+                        <td>e. Invoice Amount Currency (*)</td>
                         <td><select class="form-control" name="invoice_amount_curr" id="">
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
@@ -142,16 +144,16 @@
                     <tr>
                         <td> Invoice amount (*)</td>
                         <td><input value="{{ old('invoice_amount') }}" id="invoice_amount" class="form-control"
-                                type="text" name="invoice_amount" required></td>
+                                type="number" min="1" name="invoice_amount" required></td>
                     </tr>
                     <tr>
-                        <td>e. Quantity Balance (*)</td>
+                        <td>f. Quantity Balance (*)</td>
                         <td><input id="quantity_balance" class="form-control" type="number" name="quantity_balance"
                                 required readonly></td>
                     </tr>
 
                     <tr>
-                        <td>f. Remaining contract Currency (*)</td>
+                        <td>g. Remaining contract Currency (*)</td>
                         <td><select class="form-control" name="remaining_contract_curr" id="" required>
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
@@ -169,35 +171,35 @@
                     </tr>
                     <tr>
                     <tr>
-                        <td>g. Name Of Vessel (*) </td>
+                        <td>h. Name Of Vessel (*) </td>
                         <td>
                             <input value="{{ old('name_of_vessel') }}" class="form-control" type="text"
                                 name="name_of_vessel" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>h. Shipper / Exportir (*)</td>
+                        <td>i. Shipper / Exportir (*)</td>
                         <td>
                             <input value="{{ old('shipper') }}" class="form-control" type="text" name="shipper"
                                 required>
                         </td>
                     </tr>
                     <tr>
-                        <td>i. Consignee / Notify party (*)</td>
+                        <td>j. Consignee / Notify party (*)</td>
                         <td>
                             <input value="{{ old('consignee') }}" class="form-control" type="text" name="consignee"
                                 required>
                         </td>
                     </tr>
                     <tr>
-                        <td>j. Issuing Insurance Company (*) </td>
+                        <td>k. Issuing Insurance Company (*) </td>
                         <td>
                             <input value="{{ old('issuing_insurance_company') }}" class="form-control" type="text"
                                 name="issuing_insurance_company" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>k. Amount of Insurance Currency (*)</td>
+                        <td>l. Amount of Insurance Currency (*)</td>
                         <td><select class="form-control" name="amount_of_insurance_curr" id="" required>
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
@@ -213,33 +215,33 @@
                                 name="amount_of_insurance" required></td>
                     </tr>
                     <tr>
-                        <td>l. Loading Port (*)</td>
+                        <td>m. Loading Port (*)</td>
                         <td>
                             <input value="{{ old('loading_port') }}" class="form-control" type="text"
                                 name="loading_port" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>m. ETD Loading Port (*)</td>
+                        <td>n. ETD Loading Port (*)</td>
                         <td><input value="{{ old('etd_loading_port') }}" class="form-control" type="date"
                                 name="etd_loading_port" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>n. Unloading Port (*)</td>
+                        <td>o. Unloading Port (*)</td>
                         <td>
                             <input value="{{ old('unloading_port') }}" class="form-control" type="text"
                                 name="unloading_port" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>o. ETA Unloading Port (*)</td>
+                        <td>p. ETA Unloading Port (*)</td>
                         <td><input value="{{ old('eta_unloading_port') }}" class="form-control" type="date"
                                 name="eta_unloading_port" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>p. Exp Delivery Time (*)</td>
+                        <td>q. Exp Delivery Time (*)</td>
                         <td><input value="{{ old('exp_delivery_time') }}" class="form-control" type="date"
                                 name="exp_delivery_time" required>
                         </td>
@@ -304,7 +306,8 @@
                     </tr>
                     <tr>
                         <td>c. Packing List </td>
-                        <td>
+                        <td><input value="{{ old('packing_list') }}" class="form-control" type="number" min="1"
+                                name="packing_list" required>
                         </td>
                     </tr>
                     <tr>
@@ -328,13 +331,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>d. Cert Of Origin</td>
+                        <td>d. Cert Of Origin Non Prefensial</td>
                         <td><select class="form-control" name="cert_of_origin" id="">
-                                <option value="Form D">Form D</option>
-                                <option value="E">E</option>
-                                <option value="IJEPA">IJEPA</option>
-                                <option value="AI">AI</option>
-                                <option value="AK">AK</option>
+                                <option value="Maker / Manufactur">Maker / Manufacture</option>
+                                <option value="None">None</option>
                             </select>
                         </td>
                     </tr>
@@ -352,13 +352,26 @@
                         </td>
                     </tr>
                     <tr>
+
                         <td>e. Cert Of Origin Prefensial</td>
                         <td><select class="form-control" name="cert_of_origin_preferensial" id="">
-                                <option value="Form D">Form D</option>
-                                <option value="E">E</option>
+                                <option value="ICCEPA">ICCEPA</option>
+                                <option value="AANZFTA">AANZFTA</option>
                                 <option value="IJEPA">IJEPA</option>
-                                <option value="AI">AI</option>
-                                <option value="AK">AK</option>
+                                <option value="IECEPA">IECEPA</option>
+                                <option value="AHKFTA">AHKFTA</option>
+                                <option value="AIFTA">AIFTA</option>
+                                <option value="AJCEP">AJCEP</option>
+                                <option value="AKFTA">AKFTA</option>
+                                <option value="ATIGA">ATIGA</option>s
+                                <option value="IACEPA">IACEPA</option>
+                                <option value="RCEP-ASEAN">RCEP-ASEAN</option>
+                                <option value="RCEP-CHINA">RCEP-China</option>
+                                <option value="RCEP-JAPAN">RCEP-Japan</option>
+                                <option value="RCEP-New Zaeland">RCEP-New Zaeland</option>
+                                <option value="RCEP-Korea">RCEP-Korea</option>
+                                <option value="IKCEPA">IKCEPA</option>
+                                <option value="RCEP-Australia">RCEP-Australia</option>
                             </select>
                         </td>
                     </tr>
@@ -576,22 +589,89 @@
 
 @endsection
 @section('scripts')
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
     <script>
         $(document).ready(function() {
             var totalNilaiImpor = "{{ $transaksi->total_nilai_import }}";
             console.log(totalNilaiImpor)
             var remaining_amount = 0;
             var quantity_balance = 0;
+            $('#remaining_amount').val(totalNilaiImpor)
             $('#invoice_amount').on('input', function() {
                 var invoice = $(this).val()
                 remaining_amount = totalNilaiImpor - invoice
+                if (remaining_amount < 0) {
+                    // Alert::success('error',
+                    //     'Invoice Amount tidak boleh melebihi Remaining Contract Amount yaitu =' +
+                    //     totalNilaiImpor)
+                    swal({
+                        title: 'Oops',
+                        text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
+                            totalNilaiImpor,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#invoice_amount').val(totalNilaiImpor)
+                    invoice = totalNilaiImpor
+                    remaining_amount = totalNilaiImpor - invoice
+                }
                 $('#remaining_amount').val(remaining_amount)
 
             })
+
+            $('#quantity_balance').val(totalNilaiImpor)
             $('#quantity_delivery').on('input', function() {
                 var quantity = $(this).val()
                 quantity_balance = totalNilaiImpor - quantity
+                if (quantity_balance < 0) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
+                            totalNilaiImpor,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    // Alert::success('error',
+                    //     'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
+                    //     totalNilaiImpor)
+                    $('#quantity_delivery').val(totalNilaiImpor)
+                    quantity = totalNilaiImpor
+                    quantity_balance = totalNilaiImpor - quantity
+                }
                 $('#quantity_balance').val(quantity_balance)
+
+            })
+
+            // term change
+            $('#term').on('change', function() {
+                var term_value = $(this).val()
+                if (term_value == 'LC') {
+                    $('#term-tr').after(`<tr id="lc">
+                        <td>Issuing Bank LC (*)</td>
+                        <td><input value="{{ old('issuing_bank_lc') }}" class="form-control" type="text"
+                                name="issuing_bank_lc">
+                        </td>
+                    </tr>`)
+                } else {
+                    $('#lc').remove()
+                }
+
 
             })
         })

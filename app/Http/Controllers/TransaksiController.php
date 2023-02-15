@@ -51,6 +51,7 @@ class TransaksiController extends Controller
 
         $transaksi = new Transaksi();
         $transaksi->no_po = $request->no_po;
+        $transaksi->nama_supplier = $request->nama_supplier;
         $transaksi->judul_po = $request->judul_po;
         $transaksi->nilai_po = $request->nilai_po;
         $transaksi->total_shipment = $request->total_shipment;
@@ -98,8 +99,8 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::findOrFail($id);
         $transaksi->no_po = $request->no_po;
         $transaksi->judul_po = $request->judul_po;
+        $transaksi->nama_supplier = $request->nama_supplier;
         $transaksi->nilai_po = $request->nilai_po;
-        $transaksi->nilai_impor = $request->nilai_impor;
         $transaksi->total_shipment = $request->total_shipment;
         $transaksi->total_nilai_import = $request->total_nilai_impor;
         $transaksi->remaining_amount = $request->remaining_amount;

@@ -6,7 +6,7 @@
         <h1 class="h3 mb-0 text-gray-800">Detail Transaksi </h1>
         <!-- Button trigger modal -->
         @hasanyrole('Admin|User')
-            <a href="{{ route('transaksi.edit', [$transaksi->id]) }}" class="btn btn-secondary">
+            <a href="{{ route('transaksi.edit', [$transaksi->id]) }}" class="btn btn-success">
                 Edit Transaksi
             </a>
         @endhasanyrole
@@ -19,6 +19,11 @@
                 <div class="left">
                     <table class="table table-borderless">
                         <tbody>
+                            <tr>
+                                <td>Nama Supplier </td>
+                                <td>:</td>
+                                <td>{{ $transaksi->nama_supplier }}</td>
+                            </tr>
                             <tr>
                                 <td>No PO </td>
                                 <td>:</td>
@@ -102,9 +107,15 @@
                                 <td>{{ $ship->eta_unloading_port }}</td>
                                 <td>{{ $ship->status }}</td>
                                 <td align="center" width="10%">
+
+
                                     <a href="{{ route('shipment.edit', [$ship->id]) }}" data-toggle="tooltip"
                                         title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
+                                    </a>
+                                    <a href="{{ route('shipment.show', [$ship->id]) }}" data-toggle="tooltip"
+                                        title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                                        <i class="fas fa-eye fa-sm text-white-50"></i>
                                     </a>
                                     @hasanyrole('Admin|User')
                                         <a href="/shipment/hapus/{{ $ship->id }}" data-toggle="tooltip" title="Hapus"

@@ -34,7 +34,20 @@
     <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    @yield('css')
+    <style>
+        ul li a.nav-link:hover {
+            background: hsl(217, 89%, 21%);
+        }
 
+        ul li a.profile-link:hover {
+            background: hsl(0, 0%, 96%);
+        }
+
+        ul li a.active {
+            background: hsl(217, 89%, 21%);
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -44,7 +57,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar accordion" id="accordionSidebar"
-            style="background: hsl(217, 87%, 26%); color:#fff;">
+            style="background: hsl(217, 87%, 26%); color:#bfbfbf;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand text-white d-flex align-items-center justify-content-center" href="#">
@@ -60,7 +73,8 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('dashboard') }}">
+                <a class="nav-link text-white {{ request()->is('dashboard') ? 'active' : '' }}"
+                    href="{{ route('dashboard') }}">
                     <i class="fa fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -97,28 +111,33 @@
             </li> --}}
             @role('Admin')
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('user.index') }}">
+                    <a class="nav-link text-white {{ request()->is('user') ? 'active' : '' }}"
+                        href="{{ route('user.index') }}">
                         <i class="fas fa-users"></i>
                         <span>Data Pengguna</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('posisi.index') }}">
+                    <a class="nav-link text-white {{ request()->is('posisi') ? 'active' : '' }}"
+                        href="{{ route('posisi.index') }}">
                         <i class="fas fa-user-alt "></i>
                         <span>Posisi</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('seksi.index') }}">
+                    <a class="nav-link text-white {{ request()->is('seksi') ? 'active' : '' }}"
+                        href="{{ route('seksi.index') }}">
                         <i class="fas fa-folder"></i>
                         <span>Seksi</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('pgr.index') }}">
+                    <a class="nav-link text-white {{ request()->is('pgr') ? 'active' : '' }}"
+                        href="{{ route('pgr.index') }}">
                         <i class="fas fa-file"></i>
                         <span>PGR</span></a>
                 </li>
             @endrole
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('transaksi.index') }}">
+                <a class="nav-link text-white {{ request()->is('transaksi') ? 'active' : '' }}"
+                    href="{{ route('transaksi.index') }}">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Transaksi</span></a>
             </li>
@@ -215,8 +234,8 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link profile-link dropdown-toggle" href="#" id="userDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('asset/img/avatar2.png') }}">

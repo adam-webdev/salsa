@@ -16,6 +16,7 @@ class CreateTransaksisTable extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->integer('no_po');
+            $table->string('nama_supplier');
             $table->string('judul_po');
             $table->integer('nilai_po');
             // $table->integer('nilai_impor');

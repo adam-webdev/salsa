@@ -4,7 +4,7 @@
         <h4 class="p-2">Selamat Datang <b>{{ $user }}</b></h4>
         <div class="row px-4 mt-3 justify-content-between align-items-center">
             <div class="col-md-2">
-                <img src="{{ asset('asset/img/approve.svg') }}" width="50px" alt="">
+                <img src="{{ asset('asset/img/file.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $approve }}</p>
                 <p>PIB Proses Approve</p>
             </div>
@@ -15,13 +15,13 @@
                 <p>Pembayaran</p>
             </div>
             <div class="col-md-2">
-                <img src="{{ asset('asset/img/merah.svg') }}" width="50px"alt="">
+                <img src="{{ asset('asset/img/work-tools.png') }}" width="50px"alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $jalur_merah }}</p>
                 <p>Jalur Merah</p>
 
             </div>
             <div class="col-md-2">
-                <img src="{{ asset('asset/img/delivery.svg') }}" width="50px" alt="">
+                <img src="{{ asset('asset/img/delivery2.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $delivery }}</p>
                 <p>Delivery</p>
             </div>
@@ -29,6 +29,11 @@
                 <img src="{{ asset('asset/img/ceklis.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $spv_verif }}</p>
                 <p>Spv Verification</p>
+            </div>
+            <div class="col-md-2">
+                <img src="{{ asset('asset/img/reject.png') }}" width="50px" alt="">
+                <p style="font-size: 20px; margin-top:10px"> {{ $reject }}</p>
+                <p>Reject</p>
             </div>
         </div>
 

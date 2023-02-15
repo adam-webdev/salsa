@@ -27,7 +27,19 @@
                 <form action="{{ route('transaksi.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="supplier">Nama Supplier :</label>
+                                    <input type="text" name="nama_supplier" value="{{ old('nama_supplier') }}"
+                                        class="form-control  @error('nama_supplier') is-invalid @enderror" id="supplier"
+                                        required>
+                                    @error('nama_supplier')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -128,6 +140,7 @@
                             <th>No</th>
                             <th>No PO </th>
                             <th>Judul PO </th>
+                            <th>Nama Supplier </th>
                             <th>Nilai PO</th>
                             <th>Total Shipment </th>
                             <th>Total Nilai Import </th>
@@ -141,6 +154,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $t->no_po }}</td>
                                 <td>{{ $t->judul_po }}</td>
+                                <td>{{ $t->nama_supplier }}</td>
                                 <td>{{ $t->nilai_po }}</td>
                                 <td>{{ $t->total_shipment }}</td>
                                 <td>{{ $t->total_nilai_import }}</td>

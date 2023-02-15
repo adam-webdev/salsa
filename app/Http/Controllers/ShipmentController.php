@@ -163,6 +163,7 @@ class ShipmentController extends Controller
         $shipment->invoice_date = $request->invoice_date;
         $shipment->invoice_file = $invoice_file;
 
+        $shipment->packing_list = $request->packing_list;
         $shipment->packing_date = $request->packing_date;
         $shipment->packing_file = $packing_file;
 
@@ -214,7 +215,8 @@ class ShipmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $shipment = Shipment::findOrFail($id);
+        return view('shipment.detail', compact('shipment')); //
     }
 
     /**
@@ -419,6 +421,7 @@ class ShipmentController extends Controller
         $shipment->invoice_date = $request->invoice_date;
         $shipment->invoice_file = $invoice_file;
 
+        $shipment->packing_list = $request->packing_list;
         $shipment->packing_date = $request->packing_date;
         $shipment->packing_file = $packing_file;
 
