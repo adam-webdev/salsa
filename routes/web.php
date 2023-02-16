@@ -31,6 +31,8 @@ Route::get('/transaksi/hapus/{id}', [TransaksiController::class, "delete"]);
 Route::resource('shipment', ShipmentController::class);
 Route::get('/shipment/hapus/{id}', [ShipmentController::class, "delete"]);
 Route::get('/shipment/tambah/{id}', [ShipmentController::class, "create"])->name('shipment.tambah');
+Route::get('/shipment/print/{id}', [ShipmentController::class, "shipmentPrint"])->name('shipment.print');
+Route::get('/all-shipment/print/{id}', [ShipmentController::class, "allShipmentPrint"])->name('all-shipment.print');
 
 Route::resource('/posisi', PosisiController::class);
 Route::get('/posisi/hapus/{id}', [PosisiController::class, "delete"]);

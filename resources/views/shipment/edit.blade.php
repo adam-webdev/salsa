@@ -131,7 +131,7 @@
                         </tr>
                         <tr>
                             <td> Total Nilai Import (*)</td>
-                            <td><input value="{{ $shipment->nilai_barang }}" class="form-control" type="number"
+                            <td><input value="{{ $shipment->nilai_barang }}" class="form-control" type="text"
                                     name="nilai_barang" required></td>
                         </tr>
                         <tr>
@@ -340,7 +340,7 @@
                             <td>c. Packing List </td>
                             <td><input value="{{ $shipment->packing_list }}" class="form-control" type="number"
                                     min="1" name="packing_list" required>
-                            </td>s
+                            </td>
                         </tr>
                         <tr>
                             <td> Date </td>

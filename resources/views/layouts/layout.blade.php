@@ -57,7 +57,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar accordion" id="accordionSidebar"
-            style="background: hsl(217, 87%, 26%); color:#bfbfbf;">
+            style="background: hsl(217, 87%, 26%); color:#bfbfbf; ">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand text-white d-flex align-items-center justify-content-center" href="#">

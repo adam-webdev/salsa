@@ -5,11 +5,18 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Detail Transaksi </h1>
         <!-- Button trigger modal -->
-        @hasanyrole('Admin|User')
-            <a href="{{ route('transaksi.edit', [$transaksi->id]) }}" class="btn btn-success">
-                Edit Transaksi
+        <div>
+            <a href="{{ route('all-shipment.print', [$transaksi->id]) }}" data-toggle="tooltip" title="Cetak Pdf"
+                class="btn  btn-primary" style="color:rgb(255, 255, 255)">
+                <i class="fas fa-print"></i>
+                Cetak All Shipment
             </a>
-        @endhasanyrole
+            @hasanyrole('Admin|User')
+                <a href="{{ route('transaksi.edit', [$transaksi->id]) }}" class="btn btn-success">
+                    Edit Transaksi
+                </a>
+            @endhasanyrole
+        </div>
 
     </div>
 
@@ -39,11 +46,7 @@
                                 <td>:</td>
                                 <td>{{ $transaksi->nilai_po }}</td>
                             </tr>
-                            <tr>
-                                <td>Nilai Import </td>
-                                <td>:</td>
-                                <td>{{ $transaksi->nilai_impor }}</td>
-                            </tr>
+
                             <tr>
                                 <td>Total Shipment </td>
                                 <td>:</td>
@@ -93,6 +96,7 @@
                             <th>ETD </th>
                             <th>ETA </th>
                             <th>Status </th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -106,8 +110,12 @@
                                 <td>{{ $ship->etd_loading_port }}</td>
                                 <td>{{ $ship->eta_unloading_port }}</td>
                                 <td>{{ $ship->status }}</td>
-                                <td align="center" width="10%">
-
+                                <td>{{ $ship->keterangan_reject }}</td>
+                                <td align="center" width="16%">
+                                    <a href="{{ route('shipment.print', [$ship->id]) }}" data-toggle="tooltip"
+                                        title="Cetak Pdf" class="btn btn-sm btn-primary" style="color:blues">
+                                        <i class="fas fa-sm fa-print"></i>
+                                    </a>
 
                                     <a href="{{ route('shipment.edit', [$ship->id]) }}" data-toggle="tooltip"
                                         title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">

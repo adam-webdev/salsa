@@ -1,12 +1,19 @@
 @extends('layouts.layout')
 @section('title', 'create Shipment')
 @section('content')
-    @php
-        use RealRashid\SweetAlert\Facades\Alert;
-    @endphp
+
     @include('sweetalert::alert')
     <div class="card p-4">
         {{-- <h3>{{ $transaksi_id }}</h3> --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('shipment.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -280,13 +287,19 @@
                     </tr>
 
                     <tr>
-                        <td>b. Invoice No </td>
+                        <td>b. Invoice No
+                            <small>(*)</small>
+
+                        </td>
                         <td><input value="{{ old('invoice_no') }}" class="form-control " type="text"
                                 name="invoice_no" required>
                         </td>
                     </tr>
                     <tr>
-                        <td> Date </td>
+                        <td> Date
+                            <small>(*)</small>
+
+                        </td>
                         <td><input value="{{ old('invoice_date') }}" class="form-control" type="date"
                                 name="invoice_date" required>
                         </td>
@@ -305,13 +318,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>c. Packing List </td>
+                        <td>c. Packing List
+                            <small>(*)</small>
+                        </td>
                         <td><input value="{{ old('packing_list') }}" class="form-control" type="number" min="1"
                                 name="packing_list" required>
                         </td>
                     </tr>
                     <tr>
-                        <td> Date </td>
+                        <td> Date
+                            <small>(*)</small>
+                        </td>
                         <td><input value="{{ old('packing_date') }}" class="form-control" type="date"
                                 name="packing_date" required>
 
@@ -389,7 +406,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>f. Cert Of Weight (C/W)</td>
+                        <td>f. Cert Of Weight (C/W)
+                            <small>(*)</small>
+
+
+                        </td>
                         <td><input value="{{ old('cert_of_weight') }}" class="form-control" type="text"
                                 name="cert_of_weight" required>
                         </td>
@@ -408,7 +429,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>g. Insurance Document</td>
+                        <td>g. Insurance Document
+                            <small>(*)</small>
+
+                        </td>
                         <td><input value="{{ old('insurance_document') }}" class="form-control" type="text"
                                 name="insurance_document" required>
                         </td>
@@ -445,13 +469,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>i. Letter Of Credit (L/C) No. (*)</td>
+                        <td>i. Letter Of Credit (L/C) No.
+                            <small>(*)</small>
+
+                        </td>
                         <td><input value="{{ old('letter_of_credit') }}" class="form-control" type="text"
                                 name="letter_of_credit" required>
                         </td>
                     </tr>
                     <tr>
-                        <td> Date </td>
+                        <td> Date
+                            <small>(*)</small>
+
+                        </td>
                         <td><input value="{{ old('letter_of_credit_date') }}" class="form-control" type="date"
                                 name="letter_of_credit_date" required>
                         </td>
@@ -601,9 +631,7 @@
                 var invoice = $(this).val()
                 remaining_amount = totalNilaiImpor - invoice
                 if (remaining_amount < 0) {
-                    // Alert::success('error',
-                    //     'Invoice Amount tidak boleh melebihi Remaining Contract Amount yaitu =' +
-                    //     totalNilaiImpor)
+
                     swal({
                         title: 'Oops',
                         text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
@@ -647,9 +675,7 @@
                             // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
                         }
                     });
-                    // Alert::success('error',
-                    //     'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
-                    //     totalNilaiImpor)
+
                     $('#quantity_delivery').val(totalNilaiImpor)
                     quantity = totalNilaiImpor
                     quantity_balance = totalNilaiImpor - quantity

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\{FileRequest, UpdateFile};
 use App\Models\Shipment;
 use App\Models\Transaksi;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -48,6 +49,7 @@ class ShipmentController extends Controller
         $shipment->supplier = $request->supplier;
         $shipment->contract_no = $request->contract_no;
         $shipment->quantity_contract = $request->quantity_contract;
+        $shipment->contract_amount_curr = $request->contract_amount_curr;
         $shipment->contract_amount = $request->contract_amount;
         $shipment->retention_money = $request->retention_money;
         $shipment->term_of_payment = $request->term_of_payment;
@@ -57,7 +59,7 @@ class ShipmentController extends Controller
         $shipment->function_of_good = $request->function_of_good;
         // end general information
 
-        // 2 Information for customs cleareance
+        // 2 Information ssfor customs cleareance
 
         $shipment->shipment_no = $request->shipment_no;
         $shipment->shipment_sequence = $request->shipment_sequence;
@@ -262,6 +264,7 @@ class ShipmentController extends Controller
         $shipment->contract_no = $request->contract_no;
         $shipment->quantity_contract = $request->quantity_contract;
         $shipment->contract_amount = $request->contract_amount;
+        $shipment->contract_amount_curr = $request->contract_amount_curr;
         $shipment->retention_money = $request->retention_money;
         $shipment->term_of_payment = $request->term_of_payment;
         $shipment->issuing_bank_lc = $request->issuing_bank_lc;
@@ -458,10 +461,15 @@ class ShipmentController extends Controller
         $shipment->ppn = $request->ppn;
         $shipment->pph = $request->pph;
         $shipment->status = $request->status;
+        if ($request->status != 'Rejected') {
+            $shipment->keterangan_reject = '';
+        } else {
+            $shipment->keterangan_reject = $request->keterangan_reject;
+        }
 
         $shipment->save();
         Alert::success('Berhasil', 'Data Berhasil Diupdate.');
-        return redirect()->route('transaksi.detail', [$shipment->transaksi_id]);
+        return redirect()->route('transaksi.show', [$shipment->transaksi_id]);
     }
 
     /**
@@ -477,5 +485,18 @@ class ShipmentController extends Controller
         $shipment->delete();
         Alert::success('Berhasil', 'Data Berhasil Dihapus.');
         return redirect()->route('transaksi.detail', [$shipment->transaksi_id]);
+    }
+
+    public function shipmentPrint($id)
+    {
+        $shipment = Shipment::with('transaksi')->where('id', $id)->first();
+        $pdf = PDF::loadView('shipment.laporan.print', compact('shipment'))->setPaper('A4');
+        return $pdf->stream('laporan-shipment.pdf');
+    }
+    public function allShipmentPrint($id)
+    {
+        $shipment = Shipment::with('transaksi')->where('transaksi_id', $id)->get();
+        $pdf = PDF::loadView('shipment.laporan.all-shipment-by-transaksi', compact('shipment'))->setPaper('A4');
+        return $pdf->stream('laporan-all-shipment-all.pdf');
     }
 }

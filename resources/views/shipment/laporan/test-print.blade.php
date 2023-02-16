@@ -1,25 +1,18 @@
-@extends('layouts.layout')
-@section('title', 'Edit Shipment')
-@section('css')
-    <style>
-        iframe {
-            cursor: pointer !important;
-        }
-    </style>
-@endsection
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
 
-    @include('sweetalert::alert')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> </h1>
-        <!-- Button trigger modal -->
-        <a href="{{ route('shipment.print', [$shipment->id]) }}" class="btn btn-primary">
-            <i class="fa fa-print"></i>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Document</title>
+    {{-- <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet"> --}}
 
-            Print PDF
-        </a>
+</head>
 
-    </div>
+<body>
+    <h2>Laporan SHIPMENT PDF</h2>
     <div class="card p-4">
         <h4>Detail shipment</h4>
 
@@ -126,8 +119,8 @@
                 </tr>
                 <tr>
                     <td>a. Shipment No (*)</td>
-                    <td><input value="{{ $shipment->shipment_no }}" class="form-control" type="text" name="shipment_no"
-                            required readonly></td>
+                    <td><input value="{{ $shipment->shipment_no }}" class="form-control" type="text"
+                            name="shipment_no" required readonly></td>
 
                 </tr>
                 <tr>
@@ -137,8 +130,8 @@
                 </tr>
                 <tr>
                     <td>b. Nama Barang (*)</td>
-                    <td><input value="{{ $shipment->nama_barang }}" class="form-control" type="text" name="nama_barang"
-                            readonly></td>
+                    <td><input value="{{ $shipment->nama_barang }}" class="form-control" type="text"
+                            name="nama_barang" readonly></td>
                 </tr>
                 <tr>
                     <td> Total Nilai Import (*)</td>
@@ -184,11 +177,14 @@
                 <tr>
                     <td>g. Remaining contract Currency (*)</td>
                     <td><select class="form-control" name="remaining_contract_curr" id="" readonly>
-                            <option value="USD" {{ $shipment->remaining_contract_curr == 'USD' ? 'selected' : '' }}>
+                            <option value="USD"
+                                {{ $shipment->remaining_contract_curr == 'USD' ? 'selected' : '' }}>
                                 USD</option>
-                            <option value="JPY" {{ $shipment->remaining_contract_curr == 'JPY' ? 'selected' : '' }}>
+                            <option value="JPY"
+                                {{ $shipment->remaining_contract_curr == 'JPY' ? 'selected' : '' }}>
                                 JPY</option>
-                            <option value="EUR" {{ $shipment->remaining_contract_curr == 'EUR' ? 'selected' : '' }}>
+                            <option value="EUR"
+                                {{ $shipment->remaining_contract_curr == 'EUR' ? 'selected' : '' }}>
                                 EUR</option>
                         </select>
                     </td>
@@ -197,8 +193,8 @@
 
                 <tr>
                     <td> Remaining contract amount (*)</td>
-                    <td><input value="{{ $shipment->remaining_contract_amount }}" class="form-control" type="text"
-                            name="remaining_contract_amount" readonly></td>
+                    <td><input value="{{ $shipment->remaining_contract_amount }}" class="form-control"
+                            type="text" name="remaining_contract_amount" readonly></td>
                 </tr>
                 <tr>
                 <tr>
@@ -218,25 +214,28 @@
                 <tr>
                     <td>j. Consignee / Notify party (*)</td>
                     <td>
-                        <input value="{{ $shipment->consignee }}" class="form-control" type="text" name="consignee"
-                            readonly>
+                        <input value="{{ $shipment->consignee }}" class="form-control" type="text"
+                            name="consignee" readonly>
                     </td>
                 </tr>
                 <tr>
                     <td>k. Issuing Insurance Company (*) </td>
                     <td>
-                        <input value="{{ $shipment->issuing_insurance_company }}" class="form-control" type="text"
-                            name="issuing_insurance_company" readonly>
+                        <input value="{{ $shipment->issuing_insurance_company }}" class="form-control"
+                            type="text" name="issuing_insurance_company" readonly>
                     </td>
                 </tr>
                 <tr>
                     <td>l. Amount of Insurance Currency (*)</td>
                     <td><select class="form-control" name="amount_of_insurance_curr" id="" readonly>
-                            <option value="USD" {{ $shipment->amount_of_insurance_curr == 'USD' ? 'selected' : '' }}>
+                            <option value="USD"
+                                {{ $shipment->amount_of_insurance_curr == 'USD' ? 'selected' : '' }}>
                                 USD</option>
-                            <option value="JPY" {{ $shipment->amount_of_insurance_curr == 'JPY' ? 'selected' : '' }}>
+                            <option value="JPY"
+                                {{ $shipment->amount_of_insurance_curr == 'JPY' ? 'selected' : '' }}>
                                 JPY</option>
-                            <option value="EUR" {{ $shipment->amount_of_insurance_curr == 'EUR' ? 'selected' : '' }}>
+                            <option value="EUR"
+                                {{ $shipment->amount_of_insurance_curr == 'EUR' ? 'selected' : '' }}>
                                 >EUR</option>
                         </select>
                     </td>
@@ -333,7 +332,8 @@
 
                     </td>
                     <td><input value="{{ old('invoice_file') ?? $shipment->invoice_file }}"
-                            class="form-control @error('invoice_file') is-invalid @enderror" readonly name="invoice_file">
+                            class="form-control @error('invoice_file') is-invalid @enderror" readonly
+                            name="invoice_file">
                         <iframe allowfullscreen="true" loading="lazy" webkitallowfullscreen class="mt-2"
                             type="application/pdf" src="/storage/{{ $shipment->invoice_file }} " frameBorder="0"
                             scrolling="auto" height="300px" width="100%" id="iframe"></iframe>
@@ -344,8 +344,8 @@
                 </tr>
                 <tr>
                     <td>c. Packing List </td>
-                    <td><input value="{{ $shipment->packing_list }}" class="form-control" type="number" min="1"
-                            name="packing_list" readonly>
+                    <td><input value="{{ $shipment->packing_list }}" class="form-control" type="number"
+                            min="1" name="packing_list" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -361,7 +361,8 @@
 
                     </td>
                     <td><input value="{{ old('packing_file') ?? $shipment->packing_file }}"
-                            class="form-control @error('packing_file') is-invalid @enderror" readonly name="packing_file">
+                            class="form-control @error('packing_file') is-invalid @enderror" readonly
+                            name="packing_file">
                         <iframe allowfullscreen="true" loading="lazy" webkitallowfullscreen class="mt-2"
                             type="application/pdf" src="/storage/{{ $shipment->packing_file }} " frameBorder="0"
                             scrolling="auto" height="300px" width="100%"></iframe>
@@ -395,8 +396,8 @@
                             name="cert_of_origin_file">
                         @if ($shipment->cert_of_origin_file != '-')
                             <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
-                                src="/storage/{{ $shipment->cert_of_origin_file }} " frameBorder="0" scrolling="auto"
-                                height="300px" width="100%"></iframe>
+                                src="/storage/{{ $shipment->cert_of_origin_file }} " frameBorder="0"
+                                scrolling="auto" height="300px" width="100%"></iframe>
                         @endif
                         @error('cert_of_origin_file')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -463,8 +464,8 @@
                     </td>
                     <td><input
                             value="{{ old('cert_of_origin_preferensial_file') ?? $shipment->cert_of_origin_preferensial_file }}"
-                            class="form-control @error('cert_of_origin_preferensial_file') is-invalid @enderror" readonly
-                            name="cert_of_origin_preferensial_file">
+                            class="form-control @error('cert_of_origin_preferensial_file') is-invalid @enderror"
+                            readonly name="cert_of_origin_preferensial_file">
                         @if ($shipment->cert_of_origin_prefensial_file != '-')
                             <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                 src="/storage/{{ $shipment->cert_of_origin_prefensial_file }} " frameBorder="0"
@@ -619,8 +620,8 @@
                             name="quota_kartu_kendali">
                         @if ($shipment->quota_kartu_kendali != '-')
                             <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
-                                src="/storage/{{ $shipment->quota_kartu_kendali }} " frameBorder="0" scrolling="auto"
-                                height="300px" width="100%"></iframe>
+                                src="/storage/{{ $shipment->quota_kartu_kendali }} " frameBorder="0"
+                                scrolling="auto" height="300px" width="100%"></iframe>
                         @endif
                         @error('quota_kartu_kendali')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -635,8 +636,8 @@
                             class="form-control @error('npik') is-invalid @enderror" readonly name="npik">
                         @if ($shipment->npik != '-')
                             <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
-                                src="/storage/{{ $shipment->npik }} " frameBorder="0" scrolling="auto" height="300px"
-                                width="100%"></iframe>
+                                src="/storage/{{ $shipment->npik }} " frameBorder="0" scrolling="auto"
+                                height="300px" width="100%"></iframe>
                         @endif
                         @error('npik')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -744,13 +745,10 @@
 
         </table>
 
+
     </div>
 
-@endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
 
-        })
-    </script>
-@endsection
+</body>
+
+</html>
