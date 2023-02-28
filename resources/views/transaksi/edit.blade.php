@@ -42,8 +42,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nilai_po">Nilai PO :</label>
-                            <input type="number" name="nilai_po" value="{{ $transaksi->nilai_po }}" class="form-control"
-                                id="nilai_po" required>
+                            <div class="d-flex justify-content-between">
+
+                                <input type="number" name="nilai_po" value="{{ $transaksi->nilai_po }}"
+                                    class="form-control" id="nilai_po" required>
+                                <select width="30%" type="text" name="nilai_po_curr" class="form-control "
+                                    id="nilai_po" required>
+                                    <option value="">-- pilih currency --</option>
+                                    <option value="USD" {{ $transaksi->nilai_po_curr == 'USD' ? 'selected' : '' }}>USD
+                                    </option>
+                                    <option value="JPY" {{ $transaksi->nilai_po_curr == 'JPY' ? 'selected' : '' }}>JPY
+                                    </option>
+                                    <option value="EUR" {{ $transaksi->nilai_po_curr == 'EUR' ? 'selected' : '' }}>EUR
+                                    </option>
+                                </select>
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -64,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="remaining_amount">Remaining Amount :</label>
+                            <label for="remaining_amount">Sisa Total Nilai Impor :</label>
                             <input type="number" name="remaining_amount" class="form-control" id="remaining_amount"
                                 value="{{ $transaksi->remaining_amount }}" required>
                         </div>

@@ -49,7 +49,19 @@
                     <tr>
                         <td>d. Quantity Contract (*)</td>
                         <td><input value="{{ old('quantity_contract') }}" id="quantity_contract" class="form-control"
-                                type="text" name="quantity_contract" required></td>
+                                type="number" min="1" name="quantity_contract" required></td>
+                    </tr>
+                    <tr>
+                        <td> Unit(*)</td>
+                        <td><select class="form-control" name="quantity_contract_unit" id="" required>
+                                <option value="">-- pilih opsi --</option>
+                                <option value="Pcs">Pcs</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Set">Set</option>
+                                <option value="Ton">Ton</option>
+                                <option value="MT">MT</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>e. Contract Amount (*)</td>
@@ -58,7 +70,8 @@
                     </tr>
                     <tr>
                         <td> Contract Amount Currency(*)</td>
-                        <td><select class="form-control" name="contract_amount_curr" id="">
+                        <td><select class="form-control" name="contract_amount_curr" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
                                 <option value="EUR">EUR</option>
@@ -73,7 +86,8 @@
                     </tr>
                     <tr id='term-tr'>
                         <td>g. Term of Payment (*)</td>
-                        <td><select class="form-control" name="term_of_payment" id="term">
+                        <td><select class="form-control" name="term_of_payment" id="term" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="TT">TT</option>
                                 <option value="LC">LC</option>
                             </select>
@@ -82,7 +96,8 @@
 
                     <tr>
                         <td>h. Deliery Term Condition (*)</td>
-                        <td><select class="form-control" name="delivery_term_condition" id="">
+                        <td><select class="form-control" name="delivery_term_condition" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="EX work">EX work</option>
                                 <option value="FOB">FOB</option>
                                 <option value="CFR">CFR</option>
@@ -139,7 +154,8 @@
                     </tr>
                     <tr>
                         <td>e. Invoice Amount Currency (*)</td>
-                        <td><select class="form-control" name="invoice_amount_curr" id="">
+                        <td><select class="form-control" name="invoice_amount_curr" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
                                 <option value="EUR">EUR</option>
@@ -162,6 +178,7 @@
                     <tr>
                         <td>g. Remaining contract Currency (*)</td>
                         <td><select class="form-control" name="remaining_contract_curr" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
                                 <option value="EUR">EUR</option>
@@ -208,6 +225,8 @@
                     <tr>
                         <td>l. Amount of Insurance Currency (*)</td>
                         <td><select class="form-control" name="amount_of_insurance_curr" id="" required>
+                                <option value="">-- pilih opsi --</option>
+
                                 <option value="USD">USD</option>
                                 <option value="JPY">JPY</option>
                                 <option value="EUR">EUR</option>
@@ -230,8 +249,8 @@
                     </tr>
                     <tr>
                         <td>n. ETD Loading Port (*)</td>
-                        <td><input value="{{ old('etd_loading_port') }}" class="form-control" type="date"
-                                name="etd_loading_port" required>
+                        <td><input value="{{ old('etd_loading_port') }}" class="form-control" id="etd"
+                                type="date" name="etd_loading_port" required>
                         </td>
                     </tr>
                     <tr>
@@ -243,14 +262,14 @@
                     </tr>
                     <tr>
                         <td>p. ETA Unloading Port (*)</td>
-                        <td><input value="{{ old('eta_unloading_port') }}" class="form-control" type="date"
-                                name="eta_unloading_port" required>
+                        <td><input value="{{ old('eta_unloading_port') }}" class="form-control" id="eta"
+                                type="date" name="eta_unloading_port" required>
                         </td>
                     </tr>
                     <tr>
                         <td>q. Exp Delivery Time (*)</td>
-                        <td><input value="{{ old('exp_delivery_time') }}" class="form-control" type="date"
-                                name="exp_delivery_time" required>
+                        <td><input value="{{ old('exp_delivery_time') }}" class="form-control" id="exp"
+                                type="date" name="exp_delivery_time" required>
                         </td>
                     </tr>
                     {{-- shipping document  --}}
@@ -349,7 +368,8 @@
                     </tr>
                     <tr>
                         <td>d. Cert Of Origin Non Prefensial</td>
-                        <td><select class="form-control" name="cert_of_origin" id="">
+                        <td><select class="form-control" name="cert_of_origin" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="Maker / Manufactur">Maker / Manufacture</option>
                                 <option value="None">None</option>
                             </select>
@@ -371,7 +391,8 @@
                     <tr>
 
                         <td>e. Cert Of Origin Prefensial</td>
-                        <td><select class="form-control" name="cert_of_origin_preferensial" id="">
+                        <td><select class="form-control" name="cert_of_origin_preferensial" id="" required>
+                                <option value="">-- pilih opsi --</option>
                                 <option value="ICCEPA">ICCEPA</option>
                                 <option value="AANZFTA">AANZFTA</option>
                                 <option value="IJEPA">IJEPA</option>
@@ -412,7 +433,7 @@
 
                         </td>
                         <td><input value="{{ old('cert_of_weight') }}" class="form-control" type="text"
-                                name="cert_of_weight" required>
+                                name="cert_of_weight">
                         </td>
                     </tr>
                     <tr>
@@ -627,6 +648,75 @@
             var remaining_amount = 0;
             var quantity_balance = 0;
             var quantity_contract = 0;
+
+            var firstDate;
+            var secondDate;
+            var threeDate;
+            var eta;
+            var etd;
+            var exp;
+            $('#etd').on('input', function() {
+                etd = $(this).val();
+                etd_split = etd.split('-')
+                firstDate = new Date();
+                firstDate.setFullYear(etd_split[0], (etd_split[1] - 1), etd_split[2]);
+            })
+
+            $('#eta').on('input', function() {
+                eta = $(this).val();
+                eta_split = eta.split("-")
+
+                secondDate = new Date();
+                secondDate.setFullYear(eta_split[0], (eta_split[1] - 1), eta_split[2]);
+
+                if (secondDate >= firstDate) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Tanggal ETA Unloading Port Tidak boleh melebihi Tanggal ETA Loading Port yaitu = ' +
+                            eta,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#eta').val('')
+                }
+            })
+            $('#exp').on('input', function() {
+                exp = $(this).val();
+                exp_split = exp.split("-")
+
+                threeDate = new Date();
+                threeDate.setFullYear(exp_split[0], (exp_split[1] - 1), exp_split[2]);
+
+                if (threeDate >= secondDate) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Tanggal EXP Delivery Time Tidak boleh melebihi Tanggal ETA Unloading Port yaitu = ' +
+                            exp,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#exp').val('')
+                }
+            })
+
+
+
             $('#remaining_amount').val(totalNilaiImpor)
             $('#invoice_amount').on('input', function() {
                 var invoice = $(this).val()

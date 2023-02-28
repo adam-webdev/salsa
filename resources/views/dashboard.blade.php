@@ -4,34 +4,39 @@
         <h4 class="p-2">Selamat Datang <b>{{ $user }}</b></h4>
         <p class="p-2 text-center">Status Shipment</p>
         <div class="row px-4 mt-3 justify-content-between align-items-center">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/file.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $approve }}</p>
                 <p>PIB Proses Approve</p>
             </div>
+            <div class="col-md-1">
+                <img src="{{ asset('asset/img/check.png') }}" width="50px" alt="">
+                <p style="font-size: 20px; margin-top:10px"> {{ $staff_approve }}</p>
+                <p>Staff Approve</p>
+            </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/pembayaran.svg') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $pembayaran }}</p>
-                <p>Pembayaran</p>
+                <p>Payment</p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/work-tools.png') }}" width="50px"alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $jalur_merah }}</p>
-                <p>Jalur Merah</p>
+                <p>Red Zone</p>
 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/delivery2.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $delivery }}</p>
                 <p>Delivery</p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/ceklis.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $spv_verif }}</p>
-                <p>Spv Verification</p>
+                <p>Spv Verify</p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <img src="{{ asset('asset/img/reject.png') }}" width="50px" alt="">
                 <p style="font-size: 20px; margin-top:10px"> {{ $reject }}</p>
                 <p>Reject</p>

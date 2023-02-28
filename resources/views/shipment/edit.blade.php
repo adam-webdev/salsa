@@ -39,17 +39,36 @@
                         </tr>
                         <tr>
                             <td>d. Quantity Contract (*)</td>
-                            <td><input value="{{ $shipment->quantity_contract }}" class="form-control" type="text"
-                                    name="quantity_contract" required></td>
+                            <td><input id="quantity_contract" value="{{ $shipment->quantity_contract }}" class="form-control"
+                                    type="number" min="1" name="quantity_contract" required></td>
+                        </tr>
+                        <tr>
+                            <td> Unit(*)</td>
+                            <td><select class="form-control" name="quantity_contract_unit" id="" required>
+                                    {{-- <option value="">-- pilih opsi --</option> --}}
+                                    <option value="Pcs" {{ $shipment->quantity_contract_unit == 'Pcs' ? 'selected' : '' }}>
+                                        Pcs
+                                    </option>
+                                    <option value="Kg" {{ $shipment->quantity_contract_unit == 'Kg' ? 'selected' : '' }}>Kg
+                                    </option>
+                                    <option value="Set" {{ $shipment->quantity_contract_unit == 'Set' ? 'selected' : '' }}>
+                                        Set</option>
+                                    <option value="Ton" {{ $shipment->quantity_contract_unit == 'Ton' ? 'selected' : '' }}>
+                                        Ton</option>
+                                    <option value="MT" {{ $shipment->quantity_contract_unit == 'MT' ? 'selected' : '' }}>MT
+                                    </option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>d. Contract Amount (*)</td>
-                            <td><input value="{{ $shipment->quantity_contract }}" class="form-control" type="number"
+                            <td><input value="{{ $shipment->contract_amount }}" class="form-control" type="number"
                                     name="contract_amount" required></td>
                         </tr>
                         <tr>
                             <td>e. Quantity Amount (*)</td>
                             <td><select class="form-control" name="contract_amount_curr" id="">
+
                                     <option value="USD" {{ $shipment->contract_amount_curr == 'USD' ? 'selected' : '' }}>USD
                                     </option>
                                     <option value="JPY" {{ $shipment->contract_amount_curr == 'JPY' ? 'selected' : '' }}>JPY
@@ -65,22 +84,22 @@
                                     name="retention_money">
                             </td>
                         </tr>
-                        <tr>
+                        <tr id='term-tr'>
                             <td>g. Term of Payment (*)</td>
-                            <td><select class="form-control" name="term_of_payment" id="">
-                                    <option value="TT" {{ $shipment->contract_amount == 'TT' ? 'selected' : '' }}>TT
+                            <td><select class="form-control" name="term_of_payment" id="term">
+                                    <option value="TT" {{ $shipment->term_of_payment == 'TT' ? 'selected' : '' }}>TT
                                     </option>
-                                    <option value="LC" {{ $shipment->contract_amount == 'LC' ? 'selected' : '' }}>LC
+                                    <option value="LC" {{ $shipment->term_of_payment == 'LC' ? 'selected' : '' }}>LC
                                     </option>
                                 </select>
                             </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>h. Issuing Bank LC (*)</td>
                             <td><input value="{{ $shipment->issuing_bank_lc }}" class="form-control" type="text"
                                     name="issuing_bank_lc">
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td>i. Deliery Term Condition (*)</td>
                             <td><select class="form-control" name="delivery_term_condition" id="">
@@ -142,17 +161,17 @@
                         </tr>
                         <tr>
                             <td>d. Quantity Delivery (*)</td>
-                            <td><input value="{{ $shipment->quantity_delivery }}" class="form-control" type="text"
-                                    name="quantity_delivery" required></td>
+                            <td><input id="quantity_delivery" value="{{ $shipment->quantity_delivery }}" class="form-control"
+                                    type="text" name="quantity_delivery" required></td>
                         </tr>
                         <tr>
                             <td>e. Invoice Amount Currency (*)</td>
                             <td><select class="form-control" name="invoice_amount_curr" id="">
-                                    <option value="USD" {{ $shipment->contract_amount == 'USD' ? 'selected' : '' }}>USD
+                                    <option value="USD" {{ $shipment->invoince_amount_curr == 'USD' ? 'selected' : '' }}>USD
                                     </option>
-                                    <option value="JPY" {{ $shipment->contract_amount == 'JPY' ? 'selected' : '' }}>JPY
+                                    <option value="JPY" {{ $shipment->invoince_amount_curr == 'JPY' ? 'selected' : '' }}>JPY
                                     </option>
-                                    <option value="EUR" {{ $shipment->contract_amount == 'EUR' ? 'selected' : '' }}>EUR
+                                    <option value="EUR" {{ $shipment->invoince_amount_curr == 'EUR' ? 'selected' : '' }}>EUR
                                     </option>
                                 </select>
                             </td>
@@ -161,13 +180,13 @@
 
                         <tr>
                             <td> Invoice amount (*)</td>
-                            <td><input value="{{ $shipment->invoice_amount }}" class="form-control" type="text"
-                                    name="invoice_amount" required></td>
+                            <td><input value="{{ $shipment->invoice_amount }}" id="invoice_amount" class="form-control"
+                                    type="text" name="invoice_amount" required></td>
                         </tr>
                         <tr>
                             <td>f. Quantity Balance (*)</td>
                             <td><input value="{{ $shipment->quantity_balance }}" class="form-control" type="number"
-                                    name="quantity_balance" required></td>
+                                    id="quantity_balance"name="quantity_balance" readonly required></td>
                         </tr>
 
                         <tr>
@@ -189,8 +208,8 @@
 
                         <tr>
                             <td> Remaining contract amount (*)</td>
-                            <td><input value="{{ $shipment->remaining_contract_amount }}" class="form-control"
-                                    type="text" name="remaining_contract_amount" required></td>
+                            <td><input value="{{ $shipment->remaining_contract_amount }}" id="reamining_amount"
+                                    class="form-control" type="text" name="remaining_contract_amount" required></td>
                         </tr>
                         <tr>
                         <tr>
@@ -249,8 +268,8 @@
                         </tr>
                         <tr>
                             <td>n. ETD Loading Port (*)</td>
-                            <td><input value="{{ $shipment->etd_loading_port }}" class="form-control" type="date"
-                                    name="etd_loading_port" required>
+                            <td><input value="{{ $shipment->etd_loading_port }}" id="etd" class="form-control"
+                                    type="date" name="etd_loading_port" required>
                             </td>
                         </tr>
                         <tr>
@@ -262,14 +281,14 @@
                         </tr>
                         <tr>
                             <td>p. ETA Unloading Port (*)</td>
-                            <td><input value="{{ $shipment->eta_unloading_port }}" class="form-control" type="date"
-                                    name="eta_unloading_port" required>
+                            <td><input value="{{ $shipment->eta_unloading_port }}" id="eta" class="form-control"
+                                    type="date" name="eta_unloading_port" required>
                             </td>
                         </tr>
                         <tr>
                             <td>q. Exp Delivery Time (*)</td>
-                            <td><input value="{{ $shipment->exp_delivery_time }}" class="form-control" type="date"
-                                    name="exp_delivery_time" required>
+                            <td><input value="{{ $shipment->exp_delivery_time }}" id="exp" class="form-control"
+                                    type="date" name="exp_delivery_time" required>
                             </td>
                         </tr>
                         {{-- shipping document  --}}
@@ -700,16 +719,6 @@
                                     </option>
                                     <option value="Delivery" {{ $shipment->status == 'Delivery' ? 'selected' : '' }}>Delivery
                                     </option>
-                                    <option value="Rejected" {{ $shipment->status == 'Rejected' ? 'selected' : '' }}>Rejected
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                    @endhasanyrole
-                    @role('Manager')
-                        <tr id="status-tr">
-                            <td>Status (*)</td>
-                            <td><select class="form-control" name="status" id="status">
                                     <option value="Approve" {{ $shipment->status == 'Approve' ? 'selected' : '' }}>Approve
                                     </option>
                                     <option value="Rejected" {{ $shipment->status == 'Rejected' ? 'selected' : '' }}>Rejected
@@ -717,7 +726,20 @@
                                 </select>
                             </td>
                         </tr>
-                    @endrole
+                    @endhasanyrole
+                    @hasanyrole('Manager')
+                        <tr id="status-tr">
+                            <td>Status (*)</td>
+                            <td><select class="form-control" name="status" id="status">
+                                    <option value="Approve" {{ $shipment->status == 'PIB Approve' ? 'selected' : '' }}>PIB
+                                        Approve
+                                    </option>
+                                    <option value="Rejected" {{ $shipment->status == 'Rejected' ? 'selected' : '' }}>Rejected
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    @endhasanyrole
 
 
                 </tbody>
@@ -729,26 +751,152 @@
 
 @endsection
 @section('scripts')
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+
     <script>
         $(document).ready(function() {
-            var totalNilaiImpor = "{{ $shipment->total_nilai_import }}";
+            var totalNilaiImpor = "{{ $shipment->nilai_barang }}";
+            var quantityContract = "{{ $shipment->quantity_contract }}";
+            var quantityDelivery = "{{ $shipment->quantity_delivery }}";
+            var quantityBalance = "{{ $shipment->quantity_balance }}";
+            var issuing_bank_lc = "{{ $shipment->issuing_bank_lc }}";
+            var top = "{{ $shipment->term_of_payment }}";
+            var remaining_amount = 0
+            var firstDate;
+            var secondDate;
+            var threeDate;
+            var eta;
+            var etd;
+            var exp;
+            $('#etd').on('input', function() {
+                etd = $(this).val();
+                etd_split = etd.split('-')
+                firstDate = new Date();
+                firstDate.setFullYear(etd_split[0], (etd_split[1] - 1), etd_split[2]);
+            })
+
+            $('#eta').on('input', function() {
+                eta = $(this).val();
+                eta_split = eta.split("-")
+
+                secondDate = new Date();
+                secondDate.setFullYear(eta_split[0], (eta_split[1] - 1), eta_split[2]);
+
+                if (secondDate >= firstDate) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Tanggal ETA Unloading Port Tidak boleh melebihi Tanggal ETA Loading Port yaitu = ' +
+                            eta,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#eta').val('')
+                }
+            })
+            $('#exp').on('input', function() {
+                exp = $(this).val();
+                exp_split = exp.split("-")
+
+                threeDate = new Date();
+                threeDate.setFullYear(exp_split[0], (exp_split[1] - 1), exp_split[2]);
+
+                if (threeDate >= secondDate) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Tanggal EXP Delivery Time Tidak boleh melebihi Tanggal ETA Unloading Port yaitu = ' +
+                            exp,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#exp').val('')
+                }
+            })
+
+
             console.log(totalNilaiImpor)
             var remaining_amount = 0;
             var quantity_balance = 0;
+            var quantity_contract = 0;
+            $('#quantity_contract').on('input', function() {
+                quantity_contract = $(this).val()
+                console.log(quantity_contract)
+                $('#quantity_balance').val(quantity_contract)
+                quantity_balance = quantity_contract
+            })
+
+            $('#remaining_amount').val(totalNilaiImpor)
             $('#invoice_amount').on('input', function() {
                 var invoice = $(this).val()
                 remaining_amount = totalNilaiImpor - invoice
+                if (remaining_amount < 0) {
+
+                    swal({
+                        title: 'Oops',
+                        text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
+                            totalNilaiImpor,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
+                    $('#invoice_amount').val(totalNilaiImpor)
+                    invoice = totalNilaiImpor
+                    remaining_amount = totalNilaiImpor - invoice
+                }
                 $('#remaining_amount').val(remaining_amount)
 
             })
+
             $('#quantity_delivery').on('input', function() {
                 var quantity = $(this).val()
-                quantity_balance = totalNilaiImpor - quantity
+                quantity_balance = quantity_contract - quantity
+                console.log(quantity_balance)
+                if (quantity_balance < 0) {
+                    swal({
+                        title: 'Oops',
+                        text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
+                            quantity_contract,
+                        type: 'warning',
+                        // showCancelButton: true,
+                        confirmButtonColor: 'red',
+                        confirmButtonText: 'Close',
+                    }).then(() => {
+                        if (result.value) {
+                            // handle Confirm button click
+                        } else {
+                            // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                        }
+                    });
 
+                    $('#quantity_delivery').val(quantity_contract)
+                    quantity = quantity_contract
+                    quantity_balance = quantity_contract - quantity
+                }
                 $('#quantity_balance').val(quantity_balance)
 
             })
-
             //Rejected , keterangan
             $('#status').on('change', function() {
                 var status = $('#status').val()
@@ -758,8 +906,7 @@
                         <tr id="reject">
                             <td> Keterangan direject</small></td>
                             <td>
-                                <textarea class="form-control" rows="5" type="text" name="keterangan_reject">
-                                </textarea>
+                                <textarea class="form-control" rows="5" type="text" name="keterangan_reject" required></textarea>
                             </td>
                         </tr>
                         `
@@ -769,6 +916,37 @@
                 }
             })
 
+            if (top == "LC") {
+                if (issuing_bank_lc) {
+                    $('#term-tr').after(`<tr id="lc">
+                        <td>Issuing Bank LC (*)</td>
+                        <td><input value="{{ $shipment->issuing_bank_lc }}" class="form-control" type="text"
+                                name="issuing_bank_lc">
+                        </td>
+                    </tr>`)
+                }
+
+            } else {
+                $('#lc').remove()
+            }
+
+            $('#term').on('change', function() {
+                var term_value = $(this).val()
+                if (term_value == 'LC') {
+                    $('#term-tr').after(`<tr id="lc">
+                        <td>Issuing Bank LC (*)</td>
+                        <td><input value="{{ $shipment->issuing_bank_lc }}" class="form-control" type="text"
+                                name="issuing_bank_lc">
+                        </td>
+                    </tr>`)
+                } else {
+                    $('#lc').remove()
+                }
+
+
+            })
+
         })
     </script>
+
 @endsection

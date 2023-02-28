@@ -66,16 +66,29 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group ">
                                     <label for="nilai_po">Nila PO :</label>
-                                    <input type="number" name="nilai_po" value="{{ old('nilai_po') }}"
-                                        class="form-control  @error('nilai_po') is-invalid @enderror" id="nilai_po"
-                                        required>
-                                    @error('nilai_po')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="d-flex justify-content-between">
+                                        <input type="number" width="70%" name="nilai_po" value="{{ old('nilai_po') }}"
+                                            class="form-control  @error('nilai_po') is-invalid @enderror" id="nilai_po"
+                                            required>
+                                        @error('nilai_po')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
 
+                                        <select width="30%" type="text" name="nilai_po_curr"
+                                            class="form-control  @error('nilai_po_curr') is-invalid @enderror"
+                                            id="nilai_po" required>
+                                            <option value="">-- pilih currency --</option>
+                                            <option value="USD">USD</option>
+                                            <option value="JPY">JPY</option>
+                                            <option value="EUR">EUR</option>
+                                        </select>
 
+                                        @error('nilai_po_curr')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -103,9 +116,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="remaining_amount">Remaining Amount :</label>
+                                    <label for="remaining_amount">Sisa Total Nilai Import :</label>
                                     <input type="text" name="remaining_amount" value="{{ old('remaining_amount') }}"
                                         class="form-control @error('remaining_amount') is-invalid @enderror"
                                         id="remaining_amount" required>
@@ -113,7 +126,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
 
@@ -142,9 +155,10 @@
                             <th>Judul PO </th>
                             <th>Nama Supplier </th>
                             <th>Nilai PO</th>
+                            <th>Nilai PO Currency</th>
                             <th>Total Shipment </th>
                             <th>Total Nilai Import </th>
-                            <th>Remaining Amount </th>
+                            <th>Sisa Nilai Import </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -156,6 +170,7 @@
                                 <td>{{ $t->judul_po }}</td>
                                 <td>{{ $t->nama_supplier }}</td>
                                 <td>{{ $t->nilai_po }}</td>
+                                <td>{{ $t->nilai_po_curr }}</td>
                                 <td>{{ $t->total_shipment }}</td>
                                 <td>{{ $t->total_nilai_import }}</td>
                                 <td>{{ $t->remaining_amount }}</td>

@@ -86,6 +86,11 @@
                     <td>:</td>
                     <td class="font-bold">{{ $shipment->transaksi->nilai_po }}</td>
                 </tr>
+                <tr>
+                    <td>Nilai PO Currency </td>
+                    <td>:</td>
+                    <td class="font-bold">{{ $shipment->transaksi->nilai_po_curr }}</td>
+                </tr>
 
                 <tr>
                     <td>Total Shipment </td>
@@ -133,6 +138,11 @@
                 <tr>
                     <td>d. Quantity Contract (*)</td>
                     <td><input value="{{ $shipment->quantity_contract ?? '-' }}" class="form-control" readonly
+                            type="text" name="quantity_contract" required></td>
+                </tr>
+                <tr>
+                    <td>Unit (*)</td>
+                    <td><input value="{{ $shipment->quantity_contract_unit ?? '-' }}" class="form-control" readonly
                             type="text" name="quantity_contract" required></td>
                 </tr>
                 <tr>

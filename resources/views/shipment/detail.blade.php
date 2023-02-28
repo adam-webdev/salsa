@@ -54,6 +54,23 @@
                             name="quantity_contract" required></td>
                 </tr>
                 <tr>
+                    <td> Unit(*)</td>
+                    <td><select class="form-control" name="quantity_contract_unit" id="" required>
+                            <option value="">-- select option --</option>
+                            <option value="Pcs" {{ $shipment->quantity_contract_unit == 'Pcs' ? 'selected' : '' }}>Pcs
+                            </option>
+                            <option value="Kg" {{ $shipment->quantity_contract_unit == 'Kg' ? 'selected' : '' }}>Kg
+                            </option>
+                            <option value="Set" {{ $shipment->quantity_contract_unit == 'Set' ? 'selected' : '' }}>Set
+                            </option>
+                            <option value="Ton" {{ $shipment->quantity_contract_unit == 'Ton' ? 'selected' : '' }}>Ton
+                            </option>
+                            <option value="MT" {{ $shipment->quantity_contract_unit == 'MT' ? 'selected' : '' }}>MT
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>d. Contract Amount (*)</td>
                     <td><input value="{{ $shipment->quantity_contract }}" class="form-control" readonly type="number"
                             name="contract_amount" required></td>

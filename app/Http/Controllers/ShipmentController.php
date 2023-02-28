@@ -49,6 +49,7 @@ class ShipmentController extends Controller
         $shipment->supplier = $request->supplier;
         $shipment->contract_no = $request->contract_no;
         $shipment->quantity_contract = $request->quantity_contract;
+        $shipment->quantity_contract_unit = $request->quantity_contract_unit;
         $shipment->contract_amount_curr = $request->contract_amount_curr;
         $shipment->contract_amount = $request->contract_amount;
         $shipment->retention_money = $request->retention_money;
@@ -64,7 +65,7 @@ class ShipmentController extends Controller
         $shipment->shipment_no = $request->shipment_no;
         $shipment->shipment_sequence = $request->shipment_sequence;
         $shipment->nama_barang = $request->nama_barang;
-        $shipment->nilai_barang = $request->invoice_amount_curr;
+        $shipment->nilai_barang = $request->nilai_barang;
         $shipment->quantity_delivery = $request->quantity_delivery;
         $shipment->invoice_amount_curr = $request->invoice_amount_curr;
         $shipment->invoice_amount = $request->invoice_amount;
@@ -204,6 +205,10 @@ class ShipmentController extends Controller
         // $shipment->status = $request->status;
 
         $shipment->save();
+
+        $sisa_total_nilai_import = $request->nilai_barang - $request->invoice_amount;
+        Transaksi::where('id', $request->transaksi_id)->update(['remaining_amount' => $sisa_total_nilai_import]);
+
         Alert::success('Berhasil', 'Data Berhasil disimpan.');
         return redirect()->route('transaksi.show', [$request->transaksi_id]);
     }
@@ -263,6 +268,7 @@ class ShipmentController extends Controller
         $shipment->supplier = $request->supplier;
         $shipment->contract_no = $request->contract_no;
         $shipment->quantity_contract = $request->quantity_contract;
+        $shipment->quantity_contract_unit = $request->quantity_contract_unit;
         $shipment->contract_amount = $request->contract_amount;
         $shipment->contract_amount_curr = $request->contract_amount_curr;
         $shipment->retention_money = $request->retention_money;
@@ -277,7 +283,7 @@ class ShipmentController extends Controller
         $shipment->shipment_no = $request->shipment_no;
         $shipment->shipment_sequence = $request->shipment_sequence;
         $shipment->nama_barang = $request->nama_barang;
-        $shipment->nilai_barang = $request->invoice_amount_curr;
+        $shipment->nilai_barang = $request->nilai_barang;
         $shipment->quantity_delivery = $request->quantity_delivery;
         $shipment->invoice_amount_curr = $request->invoice_amount_curr;
         $shipment->invoice_amount = $request->invoice_amount;

@@ -54,9 +54,10 @@ class TransaksiController extends Controller
         $transaksi->nama_supplier = $request->nama_supplier;
         $transaksi->judul_po = $request->judul_po;
         $transaksi->nilai_po = $request->nilai_po;
+        $transaksi->nilai_po_curr = $request->nilai_po_curr;
         $transaksi->total_shipment = $request->total_shipment;
         $transaksi->total_nilai_import = $request->total_nilai_impor;
-        $transaksi->remaining_amount = $request->remaining_amount;
+        $transaksi->remaining_amount = $request->total_nilai_impor;
         $transaksi->save();
         Alert::success("Berhasil", "Data Berhasil ditambahkan");
         return redirect()->route('transaksi.index');
@@ -101,6 +102,7 @@ class TransaksiController extends Controller
         $transaksi->judul_po = $request->judul_po;
         $transaksi->nama_supplier = $request->nama_supplier;
         $transaksi->nilai_po = $request->nilai_po;
+        $transaksi->nilai_po_curr = $request->nilai_po_curr;
         $transaksi->total_shipment = $request->total_shipment;
         $transaksi->total_nilai_import = $request->total_nilai_impor;
         $transaksi->remaining_amount = $request->remaining_amount;

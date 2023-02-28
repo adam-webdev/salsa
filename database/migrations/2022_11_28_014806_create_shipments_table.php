@@ -26,6 +26,7 @@ class CreateShipmentsTable extends Migration
             $table->string('contract_no', 250);
             // d
             $table->string('quantity_contract', 250);
+            $table->string('quantity_contract_unit', 10);
             // e
             $table->string('contract_amount_curr', 10);
             $table->string('contract_amount', 50);
@@ -48,7 +49,7 @@ class CreateShipmentsTable extends Migration
             $table->string('shipment_sequence', 250);
 
             $table->string('nama_barang', 250);
-            $table->string('nilai_barang', 250);
+            $table->string('nilai_barang', 50);
             // b
             $table->string('quantity_delivery', 250);
             // c

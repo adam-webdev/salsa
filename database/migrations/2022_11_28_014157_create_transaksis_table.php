@@ -19,6 +19,7 @@ class CreateTransaksisTable extends Migration
             $table->string('nama_supplier');
             $table->string('judul_po');
             $table->integer('nilai_po');
+            $table->string('nilai_po_curr');
             // $table->integer('nilai_impor');
             $table->integer('total_shipment');
             $table->integer('total_nilai_import');
