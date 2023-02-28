@@ -48,8 +48,8 @@
                     </tr>
                     <tr>
                         <td>d. Quantity Contract (*)</td>
-                        <td><input value="{{ old('quantity_contract') }}" class="form-control" type="text"
-                                name="quantity_contract" required></td>
+                        <td><input value="{{ old('quantity_contract') }}" id="quantity_contract" class="form-control"
+                                type="text" name="quantity_contract" required></td>
                     </tr>
                     <tr>
                         <td>e. Contract Amount (*)</td>
@@ -626,6 +626,7 @@
             console.log(totalNilaiImpor)
             var remaining_amount = 0;
             var quantity_balance = 0;
+            var quantity_contract = 0;
             $('#remaining_amount').val(totalNilaiImpor)
             $('#invoice_amount').on('input', function() {
                 var invoice = $(this).val()
@@ -655,15 +656,22 @@
 
             })
 
-            $('#quantity_balance').val(totalNilaiImpor)
+            $('#quantity_contract').on('input', function() {
+                quantity_contract = $(this).val()
+                console.log(quantity_contract)
+                $('#quantity_balance').val(quantity_contract)
+                quantity_balance = quantity_contract
+            })
+
             $('#quantity_delivery').on('input', function() {
                 var quantity = $(this).val()
-                quantity_balance = totalNilaiImpor - quantity
+                quantity_balance = quantity_contract - quantity
+                console.log(quantity_balance)
                 if (quantity_balance < 0) {
                     swal({
                         title: 'Oops',
                         text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
-                            totalNilaiImpor,
+                            quantity_contract,
                         type: 'warning',
                         // showCancelButton: true,
                         confirmButtonColor: 'red',
@@ -676,13 +684,14 @@
                         }
                     });
 
-                    $('#quantity_delivery').val(totalNilaiImpor)
-                    quantity = totalNilaiImpor
-                    quantity_balance = totalNilaiImpor - quantity
+                    $('#quantity_delivery').val(quantity_contract)
+                    quantity = quantity_contract
+                    quantity_balance = quantity_contract - quantity
                 }
                 $('#quantity_balance').val(quantity_balance)
 
             })
+
 
             // term change
             $('#term').on('change', function() {
