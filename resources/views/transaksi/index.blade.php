@@ -1,5 +1,18 @@
 @extends('layouts.layout')
 @section('title', 'Transaksi')
+@section('css')
+    <style>
+        .nilai_po {
+            border-radius: 4px 0 0 4px !important;
+        }
+
+        .nilai_po_curr {
+            border-radius: 0 4px 4px 0 !important;
+            width: 150px;
+            background: rgb(230, 229, 229);
+        }
+    </style>
+@endsection
 @section('content')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -70,16 +83,15 @@
                                     <label for="nilai_po">Nila PO :</label>
                                     <div class="d-flex justify-content-between">
                                         <input type="number" width="70%" name="nilai_po" value="{{ old('nilai_po') }}"
-                                            class="form-control  @error('nilai_po') is-invalid @enderror" id="nilai_po"
-                                            required>
+                                            class="form-control nilai_po @error('nilai_po') is-invalid @enderror"
+                                            id="nilai_po" required>
                                         @error('nilai_po')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
 
                                         <select width="30%" type="text" name="nilai_po_curr"
-                                            class="form-control  @error('nilai_po_curr') is-invalid @enderror"
+                                            class="form-control nilai_po_curr  @error('nilai_po_curr') is-invalid @enderror"
                                             id="nilai_po" required>
-                                            <option value="">-- pilih currency --</option>
                                             <option value="USD">USD</option>
                                             <option value="JPY">JPY</option>
                                             <option value="EUR">EUR</option>

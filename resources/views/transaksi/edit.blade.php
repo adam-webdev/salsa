@@ -1,5 +1,18 @@
 @extends('layouts.layout')
 @section('title', 'Edit Transaksi')
+@section('css')
+    <style>
+        .nilai_po {
+            border-radius: 4px 0 0 4px !important;
+        }
+
+        .nilai_po_curr {
+            border-radius: 0 4px 4px 0 !important;
+            width: 150px;
+            background: rgb(230, 229, 229);
+        }
+    </style>
+@endsection
 @section('content')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -45,10 +58,9 @@
                             <div class="d-flex justify-content-between">
 
                                 <input type="number" name="nilai_po" value="{{ $transaksi->nilai_po }}"
-                                    class="form-control" id="nilai_po" required>
-                                <select width="30%" type="text" name="nilai_po_curr" class="form-control "
-                                    id="nilai_po" required>
-                                    <option value="">-- pilih currency --</option>
+                                    class="form-control nilai_po" id="nilai_po" required>
+                                <select width="30%" type="text" name="nilai_po_curr"
+                                    class="form-control nilai_po_curr " id="nilai_po" required>
                                     <option value="USD" {{ $transaksi->nilai_po_curr == 'USD' ? 'selected' : '' }}>USD
                                     </option>
                                     <option value="JPY" {{ $transaksi->nilai_po_curr == 'JPY' ? 'selected' : '' }}>JPY
