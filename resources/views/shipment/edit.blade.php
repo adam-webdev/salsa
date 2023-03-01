@@ -24,18 +24,18 @@
                             {{-- <input type="hidden" name="transaksi_id" value="{{ $transaksi_id }}"> --}}
                             <td>a. Subjec Of Contract (*)</td>
                             <td><input value="{{ $shipment->subject_of_contract }}" class="form-control" type="text"
-                                    name="subject_of_contract" required></td>
+                                    name="subject_of_contract" required readonly></td>
                         </tr>
                         <tr>
                             <td>b. Supplier / Vendor (*)</td>
                             <td><input value="{{ $shipment->supplier }}" class="form-control" type="text" name="supplier"
-                                    required>
+                                    required readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>c. Contract No (*)</td>
                             <td><input value="{{ $shipment->contract_no }}" class="form-control" type="number"
-                                    name="contract_no" required></td>
+                                    name="contract_no" required readonly></td>
                         </tr>
                         <tr>
                             <td>d. Quantity Contract (*)</td>
@@ -180,8 +180,9 @@
 
                         <tr>
                             <td> Invoice amount (*)</td>
-                            <td><input value="{{ $shipment->invoice_amount }}" id="invoice_amount" class="form-control"
-                                    type="text" name="invoice_amount" required></td>
+                            <td><input id="invoice_amount" value="{{ $shipment->invoice_amount }}" class="form-control"
+                                    type="text" name="invoice_amount" required>
+                            </td>
                         </tr>
                         <tr>
                             <td>f. Quantity Balance (*)</td>
@@ -208,8 +209,9 @@
 
                         <tr>
                             <td> Remaining contract amount (*)</td>
-                            <td><input value="{{ $shipment->remaining_contract_amount }}" id="reamining_amount"
-                                    class="form-control" type="text" name="remaining_contract_amount" required></td>
+                            <td><input id="remaining_amount" value="{{ $shipment->remaining_contract_amount }}"
+                                    class="form-control" type="text" name="remaining_contract_amount" required readonly>
+                            </td>
                         </tr>
                         <tr>
                         <tr>
@@ -320,7 +322,7 @@
                                     name="bl_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->bl_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('bl_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -349,7 +351,7 @@
                                     name="invoice_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->invoice_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('invoice_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -378,7 +380,7 @@
                                     name="packing_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->packing_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('packing_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -410,7 +412,7 @@
                                 @if ($shipment->cert_of_origin_file != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->cert_of_origin_file }} " frameBorder="0"
-                                        scrolling="auto" height="100%" width="100%"></iframe>
+                                        scrolling="auto" height="300px" width="100%"></iframe>
                                 @endif
                                 @error('cert_of_origin_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -482,7 +484,7 @@
                                 @if ($shipment->cert_of_origin_prefensial_file != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->cert_of_origin_prefensial_file }} " frameBorder="0"
-                                        scrolling="auto" height="100%" width="100%"></iframe>
+                                        scrolling="auto" height="300px" width="100%"></iframe>
                                 @endif
                                 @error('cert_of_origin_preferensial_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -505,7 +507,7 @@
                                     name="cert_of_weight_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->cert_of_weight_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('cert_of_weight_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -526,7 +528,7 @@
                                     name="insurance_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->insurance_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('insurance_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -573,7 +575,7 @@
                                     name="letter_of_credit_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->letter_of_credit_file }} " frameBorder="0" scrolling="auto"
-                                    height="100%" width="100%"></iframe>
+                                    height="300px" width="100%"></iframe>
                                 @error('letter_of_credit_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -595,7 +597,7 @@
                                     type="file" name="doc_budget_of_available_file">
                                 <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                     src="/storage/{{ $shipment->doc_budget_of_available_file }} " frameBorder="0"
-                                    scrolling="auto" height="100%" width="100%"></iframe>
+                                    scrolling="auto" height="300px" width="100%"></iframe>
                                 @error('doc_budget_of_available_file')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
@@ -617,7 +619,7 @@
                                 @if ($shipment->spi_besi_baja != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->spi_besi_baja }} " frameBorder="0" scrolling="auto"
-                                        height="100%" width="100%"></iframe>
+                                        height="300px" width="100%"></iframe>
                                 @endif
                                 @error('spi_besi_baja')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -634,7 +636,7 @@
                                 @if ($shipment->quota_kartu_kendali != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->quota_kartu_kendali }} " frameBorder="0"
-                                        scrolling="auto" height="100%" width="100%"></iframe>
+                                        scrolling="auto" height="300px" width="100%"></iframe>
                                 @endif
                                 @error('quota_kartu_kendali')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -650,7 +652,7 @@
                                 @if ($shipment->npik != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->npik }} " frameBorder="0" scrolling="auto"
-                                        height="100%" width="100%"></iframe>
+                                        height="300px" width="100%"></iframe>
                                 @endif
                                 @error('npik')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -668,7 +670,7 @@
                                 @if ($shipment->surat_pengecualian_import != '-')
                                     <iframe allowfullscreen="true" loading="lazy" class="mt-2" type="application/pdf"
                                         src="/storage/{{ $shipment->surat_pengecualian_import }} " frameBorder="0"
-                                        scrolling="auto" height="100%" width="100%"></iframe>
+                                        scrolling="auto" height="300px" width="100%"></iframe>
                                 @endif
                                 @error('surat_pengecualian_import')
                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -761,7 +763,7 @@
             var quantityBalance = "{{ $shipment->quantity_balance }}";
             var issuing_bank_lc = "{{ $shipment->issuing_bank_lc }}";
             var top = "{{ $shipment->term_of_payment }}";
-            var remaining_amount = 0
+
             var firstDate;
             var secondDate;
             var threeDate;
@@ -829,8 +831,12 @@
             })
 
 
-            console.log(totalNilaiImpor)
+            var remainingAmount = "{{ $shipment->remaining_contract_amount }}";
+            var invoice_amount = "{{ $shipment->invoice_amount }}";
             var remaining_amount = 0;
+            // $('#remaining_amount').val(remainingAmount)
+            // $('#invoice_amount').val(invoice_amount)
+
             var quantity_balance = 0;
             var quantity_contract = 0;
             $('#quantity_contract').on('input', function() {
@@ -840,16 +846,16 @@
                 quantity_balance = quantity_contract
             })
 
-            $('#remaining_amount').val(totalNilaiImpor)
+
             $('#invoice_amount').on('input', function() {
                 var invoice = $(this).val()
-                remaining_amount = totalNilaiImpor - invoice
+                remaining_amount = remainingAmount - invoice
                 if (remaining_amount < 0) {
 
                     swal({
                         title: 'Oops',
-                        text: 'Quantity Delivery tidak boleh melebihi Quantity Balance yaitu =' +
-                            totalNilaiImpor,
+                        text: 'Invoice Amount tidak boleh melebihi Remaining contract amount  yaitu = ' +
+                            remainingAmount,
                         type: 'warning',
                         // showCancelButton: true,
                         confirmButtonColor: 'red',
@@ -861,9 +867,11 @@
                             // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
                         }
                     });
-                    $('#invoice_amount').val(totalNilaiImpor)
-                    invoice = totalNilaiImpor
-                    remaining_amount = totalNilaiImpor - invoice
+                    $('#invoice_amount').val(remainingAmount)
+                    invoice = remainingAmount
+                    remaining_amount = remainingAmount - invoice
+                    // $('#remaining_amount').val(remaining_amount)
+
                 }
                 $('#remaining_amount').val(remaining_amount)
 
